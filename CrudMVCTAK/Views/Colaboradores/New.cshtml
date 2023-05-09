@@ -1,0 +1,77 @@
+﻿@model CrudMVCTAK.Models.ViewModel.ColaboradoresViewModel
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>New</h2>
+
+<form>
+    <div class="row">
+
+        <div class="form-group">
+            @Html.LabelFor(d => d.Name) <br>
+            @Html.TextBoxFor(d => d.Name, new { id = "Name" })
+        </div> <br>
+
+        <div class="form-group">
+            @Html.LabelFor(d => d.LastName) <br>
+            @Html.TextBoxFor(d => d.LastName, new { id = "LastName" })
+        </div> <br>
+
+        <div class="form-group">
+            @Html.LabelFor(d => d.DateN) <br>
+            @Html.TextBoxFor(d => d.DateN, new { id = "DateN" })
+        </div> <br>
+
+        <div class="form-group">
+            @Html.LabelFor(d => d.EstadoCivil) <br>
+            @Html.TextBoxFor(d => d.EstadoCivil, new { id = "EstadoCivil" })
+        </div> <br>
+
+        <div class="form-group">
+            @Html.LabelFor(d => d.GradoAC) <br>
+            @Html.TextBoxFor(d => d.GradoAC, new { id = "GradoAC" })
+        </div> <br>
+
+        <div class="form-group">
+            @Html.LabelFor(d => d.Direccion) <br>
+            @Html.TextBoxFor(d => d.Direccion, new { id = "Direccion" }) <br>
+        </div><br>
+        <br>
+        <br><input type="button" value="Guardar" onclick="jsAdd()" style='width:85px; height:35px'/>  
+
+    </div>
+</form>
+
+<script>
+    var url = "@Url.Content("~/Colaboradores/Save")";
+    function jsAdd() {
+        fetch(url, {
+            method: "POST",
+            body: JSON.stringify({
+                Name: document.getElementById("Name").value, 
+                LastName: document.getElementById("LastName").value,
+                DateN: document.getElementById("DateN").value,
+                EstadoCivil: document.getElementById("EstadoCivil").value,
+                GradoAC: document.getElementById("GradoAC").value,
+                Direccion: document.getElementById("Direccion").value
+            }),
+            headers: {
+                'Accept': "application/Json",
+                'Content-Type': "application/Json"
+            }
+        }).then(function (response) {
+            if (response.ok)
+                return response.text()
+            else
+                alert("Error al ejecutar")
+        }).then(function (Data) {
+            if (Data != "1") {
+                alert(Data)
+            } else {
+                document.location.href = "@Url.Content("~/Colaboradores/")";
+            }
+        })
+    }
+      
+</script>

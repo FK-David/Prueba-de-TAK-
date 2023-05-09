@@ -1,0 +1,22 @@
+﻿@model List<CrudMVCTAK.Models.ViewModel.ListColaboradoresViewModel>
+@{
+    Layout = null;
+
+}
+
+@foreach (var oColaboradores in Model)
+ {
+    <div>
+        Nombre: @oColaboradores.Name<br />
+        Apellidos: @oColaboradores.LastName<br />
+        Fecha de Nacimiento: @oColaboradores.DateN<br />
+        Estado Civil: @oColaboradores.EstadoCivil<br />
+        Ultimo Grado: @oColaboradores.GradoAC<br />
+        Direccion: @oColaboradores.Direccion<br />
+        <input onclick="document.location.href='@Url.Content("~/Colaboradores/Edit/?Id="+oColaboradores.Id)' " type="button" value="Editar" />
+        <input onclick="jsDelete(@oColaboradores.Id)"  type="button" value="Eliminar" />
+        
+    </div>
+ }
+
+
